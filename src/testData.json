@@ -1,0 +1,302 @@
+{
+    "status": "created",
+    "testTitle": "The Kingdom of Mali and the City of Timbuktu - Grade 7 History Test",
+    "totalPoints": 50,
+    "showAnswersAfterEachQuestion": false,
+    "learner": {
+      "id": "LEARNER_ID",
+      "name": "LEARNER_NAME"
+    },
+    "submissionDate": null,
+    "totalScore": null,
+    "tutor": {
+      "id": "TUTOR_ID",
+      "name": "TUTOR_NAME",
+      "gradingDate": null,
+      "overallFeedback": null
+    },
+    "questions": [
+      {
+        "id": 1,
+        "type": "MCQ",
+        "points": 2,
+        "question": "Which river runs through the Mali Empire?",
+        "options": [
+          { "label": "a", "text": "Niger River" },
+          { "label": "b", "text": "Congo River" },
+          { "label": "c", "text": "Nile River" },
+          { "label": "d", "text": "Zambezi River" }
+        ],
+        "correctAnswerMCQ": ["a"],
+        "explanationMCQ": "The Niger River flows through the Mali Empire.",
+        "learnerAnswerMCQ": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 2,
+        "type": "MCQ",
+        "points": 2,
+        "question": "What was the main form of transport for traders across the Sahara Desert?",
+        "options": [
+          { "label": "a", "text": "Horseback" },
+          { "label": "b", "text": "Camel caravans" },
+          { "label": "c", "text": "Donkeys" },
+          { "label": "d", "text": "Camels" }
+        ],
+        "correctAnswerMCQ": ["b"],
+        "explanationMCQ": "Camel caravans were the primary means of transport for traders across the Sahara.",
+        "learnerAnswerMCQ": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 3,
+        "type": "Text",
+        "points": 5,
+        "question": "Describe the significance of Mansa Musa's pilgrimage to Mecca.",
+        "correctAnswerText": [
+          "Mansa Musa's pilgrimage to Mecca in 1324-1325 showcased the wealth and generosity of the Mali Empire. He traveled with 60,000 soldiers and officials, distributed large amounts of gold, funded mosque constructions, and returned with scholars and books, enhancing Mali's reputation as a center of learning."
+        ],
+        "learnerAnswerText": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 4,
+        "type": "TrueFalse",
+        "points": 1,
+        "question": "Timbuktu was founded in the 12th century.",
+        "correctAnswerTrueFalse": true,
+        "explanationTrueFalse": "Timbuktu was founded in 1100 CE.",
+        "learnerAnswerTrueFalse": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 5,
+        "type": "FillInTheBlank",
+        "points": 2,
+        "question": "The Djingareyber Mosque in Timbuktu was built using _________ bricks mixed with straw and rice husks.",
+        "correctAnswerFillInTheBlank": ["mud"],
+        "explanationFillInTheBlank": "The Djingareyber Mosque was constructed with mud bricks mixed with straw and rice husks.",
+        "learnerAnswerFillInTheBlank": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 6,
+        "type": "Matching",
+        "points": 3,
+        "question": "Match the following terms with their correct definitions.",
+        "pairs": [
+          { "left": "Hajj", "rightOptions": ["A pilgrimage to Mecca", "A type of currency", "A traditional Malian garment"] },
+          { "left": "Kola nuts", "rightOptions": ["Used as money in Mali", "A staple food", "A form of transportation"] },
+          { "left": "Zakat", "rightOptions": ["Almsgiving in Islam", "A Malian festival", "A type of architecture"] }
+        ],
+        "correctAnswerMatching": [
+          { "left": "Hajj", "right": "A pilgrimage to Mecca" },
+          { "left": "Kola nuts", "right": "Used as money in Mali" },
+          { "left": "Zakat", "right": "Almsgiving in Islam" }
+        ],
+        "explanationMatching": "Hajj is the pilgrimage to Mecca, Kola nuts were used as money, and Zakat is almsgiving in Islam.",
+        "learnerAnswerMatching": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 7,
+        "type": "MCQ",
+        "points": 2,
+        "question": "What was the primary reason traders used camel caravans in the Sahara Desert?",
+        "options": [
+          { "label": "a", "text": "They were faster than other animals." },
+          { "label": "b", "text": "Camels could survive longer without water." },
+          { "label": "c", "text": "Camels were cheaper to maintain." },
+          { "label": "d", "text": "Camels were sacred animals." }
+        ],
+        "correctAnswerMCQ": ["b"],
+        "explanationMCQ": "Camels could survive up to nine days without water, making them ideal for desert travel.",
+        "learnerAnswerMCQ": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 8,
+        "type": "Text",
+        "points": 5,
+        "question": "Explain the economic prosperity of the Mali Empire under Mansa Musa.",
+        "correctAnswerText": [
+          "Under Mansa Musa, the Mali Empire experienced economic prosperity through extensive trade routes across the Sahara. The empire was rich in gold, which was highly demanded in Europe and the Middle East. Mansa Musa taxed traders, encouraged agricultural production, and facilitated trade in goods like kola nuts and cowrie shells, enhancing Mali's wealth and stability."
+        ],
+        "learnerAnswerText": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 9,
+        "type": "TrueFalse",
+        "points": 1,
+        "question": "The Great Mosque in Djenne is the largest mud-brick structure in the world.",
+        "correctAnswerTrueFalse": true,
+        "explanationTrueFalse": "The Great Mosque in Djenne is indeed the largest mud-brick structure globally.",
+        "learnerAnswerTrueFalse": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 10,
+        "type": "FillInTheBlank",
+        "points": 2,
+        "question": "The Sankore University in Timbuktu could accommodate approximately _______ students.",
+        "correctAnswerFillInTheBlank": ["25,000"],
+        "explanationFillInTheBlank": "The Sankore University had the capacity to take about 25,000 students.",
+        "learnerAnswerFillInTheBlank": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 11,
+        "type": "Matching",
+        "points": 3,
+        "question": "Match the following individuals with their contributions.",
+        "pairs": [
+          { "left": "Leo Africanus", "rightOptions": ["Wrote 'Description of Africa'", "Built the Great Mosque", "Led the pilgrimage to Mecca"] },
+          { "left": "Mansa Musa", "rightOptions": ["Ruled Mali during its Golden Age", "Converted to Christianity", "Invented the camel caravan"] },
+          { "left": "Sankore", "rightOptions": ["A wealthy Muslim woman who funded the university", "A type of manuscript", "A trade route"] }
+        ],
+        "correctAnswerMatching": [
+          { "left": "Leo Africanus", "right": "Wrote 'Description of Africa'" },
+          { "left": "Mansa Musa", "right": "Ruled Mali during its Golden Age" },
+          { "left": "Sankore", "right": "A wealthy Muslim woman who funded the university" }
+        ],
+        "explanationMatching": "Leo Africanus authored 'Description of Africa', Mansa Musa was the ruler during the empire's peak, and Sankore was a benefactor of the university.",
+        "learnerAnswerMatching": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 12,
+        "type": "MCQ",
+        "points": 2,
+        "question": "Why was Timbuktu declared a World Heritage Site?",
+        "options": [
+          { "label": "a", "text": "Because of its natural beauty." },
+          { "label": "b", "text": "Due to its historical architecture and learning centers." },
+          { "label": "c", "text": "Because it is the capital of Mali." },
+          { "label": "d", "text": "Due to its modern infrastructure." }
+        ],
+        "correctAnswerMCQ": ["b"],
+        "explanationMCQ": "Timbuktu was declared a World Heritage Site because of its rich historical architecture and significance as a center of learning.",
+        "learnerAnswerMCQ": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 13,
+        "type": "Text",
+        "points": 5,
+        "question": "Discuss the impact of the South Africa-Mali Scrolls Project on the preservation of the Timbuktu Manuscripts.",
+        "correctAnswerText": [
+          "The South Africa-Mali Scrolls Project significantly contributed to preserving the Timbuktu Manuscripts by collecting, conserving, and cataloguing them. A special library was built to store the manuscripts safely, researchers and librarians were trained, and digital copies were made. This collaboration ensured that the manuscripts were protected from environmental threats and human conflict, safeguarding Africa's rich written history."
+        ],
+        "learnerAnswerText": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 14,
+        "type": "FillInTheBlank",
+        "points": 2,
+        "question": "The first university in the world was _______ University in Timbuktu.",
+        "correctAnswerFillInTheBlank": ["Sankore"],
+        "explanationFillInTheBlank": "Sankore University is recognized as the first university in the world, located in Timbuktu.",
+        "learnerAnswerFillInTheBlank": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 15,
+        "type": "TrueFalse",
+        "points": 1,
+        "question": "Mansa Musa allowed religious freedom in the Kingdom of Mali.",
+        "correctAnswerTrueFalse": true,
+        "explanationTrueFalse": "Mansa Musa made Islam the state religion but still allowed religious freedom.",
+        "learnerAnswerTrueFalse": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 16,
+        "type": "MCQ",
+        "points": 2,
+        "question": "Which of the following was NOT a reason for West Africans converting to Islam?",
+        "options": [
+          { "label": "a", "text": "Better trading prices with Muslims" },
+          { "label": "b", "text": "Opportunities to read and write" },
+          { "label": "c", "text": "Mandatory conversion by force" },
+          { "label": "d", "text": "Influence of Muslim advisors to rulers" }
+        ],
+        "correctAnswerMCQ": ["c"],
+        "explanationMCQ": "Conversions were largely voluntary for economic and educational benefits, not typically forced.",
+        "learnerAnswerMCQ": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 17,
+        "type": "Matching",
+        "points": 3,
+        "question": "Match the following terms with their correct definitions.",
+        "pairs": [
+          { "left": "Manuscripts", "rightOptions": ["Handwritten books", "Stone carvings", "Oral stories"] },
+          { "left": "Oasis", "rightOptions": ["A wet rest stop in the desert", "A type of camel", "A Malian festival"] },
+          { "left": "Zakat", "rightOptions": ["Almsgiving in Islam", "A form of architecture", "A type of trade good"] }
+        ],
+        "correctAnswerMatching": [
+          { "left": "Manuscripts", "right": "Handwritten books" },
+          { "left": "Oasis", "right": "A wet rest stop in the desert" },
+          { "left": "Zakat", "right": "Almsgiving in Islam" }
+        ],
+        "explanationMatching": "Manuscripts are handwritten books, oases are wet areas in deserts, and zakat is almsgiving.",
+        "learnerAnswerMatching": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 18,
+        "type": "Text",
+        "points": 5,
+        "question": "Explain the role of the Niger River in the Mali Empire.",
+        "correctAnswerText": [
+          "The Niger River was crucial to the Mali Empire as it provided a vital water source for agriculture, supported trade routes, and facilitated transportation of goods and people. Its 4,000km length connected Mali to North Africa, Europe, and the Middle East, enabling extensive trade, particularly in gold and salt, which contributed significantly to the empire's wealth and prosperity."
+        ],
+        "learnerAnswerText": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 19,
+        "type": "FillInTheBlank",
+        "points": 2,
+        "question": "After Mansa Musa's pilgrimage, the price of gold in Cairo ________ and took years to recover.",
+        "correctAnswerFillInTheBlank": ["fell"],
+        "explanationFillInTheBlank": "Mansa Musa distributed so much gold in Cairo that its price fell and took years to recover.",
+        "learnerAnswerFillInTheBlank": null,
+        "score": null,
+        "tutorFeedback": null
+      },
+      {
+        "id": 20,
+        "type": "TrueFalse",
+        "points": 1,
+        "question": "The Sankore Mosque is part of Sankore University in Timbuktu.",
+        "correctAnswerTrueFalse": true,
+        "explanationTrueFalse": "The Sankore Mosque and Sankore University are interconnected, forming a center of learning.",
+        "learnerAnswerTrueFalse": null,
+        "score": null,
+        "tutorFeedback": null
+      }
+    ]
+  }
+  
