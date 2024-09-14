@@ -1,48 +1,58 @@
+// src/components/TestDisplay.jsx
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import testData from '../testData.json';  // Mock test data
-import Question from './Question';  // Import Question component
+import testData from '../testData.json';  // Import the mock test data
+import Question from './Question';  // Component to display each question
+import { Typography, Button, Box } from '@mui/material';
 
 function TestDisplay() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { testTitle, numQuestions } = location.state;  // Get test title and number of questions
+  const { testTitle, numQuestions } = location.state || {};  // Get test title and number of questions from the state
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState({});  // Store answers here
+  const [answers, setAnswers] = useState({});
 
   useEffect(() => {
-    // Load a slice of test data based on numQuestions
-    setQuestions(testData.questions.slice(0, numQuestions));
-  }, [numQuestions]);
+    if (!testTitle || !numQuestions) {
+      navigate('/');  // If no test is configured, navigate back to home
+    } else {
+      // Slice the questions array based on the requested number of questions and available questions
+      const availableQuestions = testData.questions.slice(0, Math.min(numQuestions, testData.questions.length));
+      setQuestions(availableQuestions);
+    }
+  }, [testTitle, numQuestions, navigate]);
 
-  // Function to handle answer selection
   const handleAnswer = (questionId, answer) => {
-    setAnswers({ ...answers, [questionId]: answer });  // Store the answer in the state
-    console.log("Updated answers:", answers);  // Logging answers to verify
+    setAnswers((prev) => ({ ...prev, [questionId]: answer }));
   };
 
   const handleSubmit = () => {
-    // For now, just log the answers to the console
     console.log("Submitted answers:", answers);
-    
-    // Navigate to the TestResult page
+    // You can add grading logic here or send answers to a server
     navigate('/result');
   };
 
   return (
-    <div>
-      <h2>{testTitle}</h2>
-      {/* Render each question using the Question component */}
-      {questions.map((question, index) => (
-        <Question
-          key={index}
-          question={question}
-          onAnswer={(answer) => handleAnswer(question.id, answer)}
-        />
-      ))}
-      {/* Button to submit the test */}
-      <button onClick={handleSubmit}>Submit Test</button>
-    </div>
+    <Box>
+      <Typography variant="h4" gutterBottom>
+        {testTitle}
+      </Typography>
+      {questions.length > 0 ? (
+        questions.map((question, index) => (
+          <Box key={index} mb={4}>
+            <Question
+              question={question}
+              onAnswer={(answer) => handleAnswer(question.id, answer)}
+            />
+          </Box>
+        ))
+      ) : (
+        <Typography variant="h6">No questions available.</Typography>
+      )}
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+        Submit Test
+      </Button>
+    </Box>
   );
 }
 

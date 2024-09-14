@@ -1,112 +1,93 @@
 // src/components/Question.jsx
 import React from 'react';
+import { Typography, RadioGroup, FormControlLabel, Radio, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const Question = ({ question, onAnswer }) => {
 
-  // Handle MCQ
-  const handleMCQChange = (option) => {
-    onAnswer(option);
+  const handleMCQChange = (event) => {
+    onAnswer(event.target.value);
   };
 
-  // Handle Text Input
   const handleTextChange = (event) => {
     onAnswer(event.target.value);
   };
 
-  // Handle True/False Change
   const handleTrueFalseChange = (event) => {
-    onAnswer(event.target.value === 'true'); // Convert string to boolean
+    onAnswer(event.target.value === 'true');
   };
 
-  // Handle Matching Change
   const handleMatchingChange = (leftTerm, event) => {
     onAnswer({ ...question.matchingAnswers, [leftTerm]: event.target.value });
   };
 
   return (
     <div>
-      <h3>{question.question}</h3>
+      <Typography variant="h6" gutterBottom>
+        {question.question}
+      </Typography>
 
-      {/* Render MCQ */}
       {question.type === 'MCQ' && (
-        <ul>
+        <RadioGroup onChange={handleMCQChange}>
           {question.options.map((option, index) => (
-            <li key={index}>
-              <input
-                type="radio"
-                name={question.id}
-                value={option.label}
-                onChange={() => handleMCQChange(option.label)}
-              />
-              {option.text}
-            </li>
+            <FormControlLabel
+              key={index}
+              value={option.label}
+              control={<Radio />}
+              label={option.text}
+            />
           ))}
-        </ul>
+        </RadioGroup>
       )}
 
-      {/* Render Text Question */}
       {question.type === 'Text' && (
-        <textarea
-          rows="4"
-          cols="50"
+        <TextField
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={4}
           onChange={handleTextChange}
           placeholder="Write your answer here..."
-        ></textarea>
+        />
       )}
 
-      {/* Render Fill in the Blank */}
       {question.type === 'FillInTheBlank' && (
-        <input
-          type="text"
+        <TextField
+          variant="outlined"
+          fullWidth
           onChange={handleTextChange}
           placeholder="Fill in the blank..."
         />
       )}
 
-      {/* Render Matching Question */}
       {question.type === 'Matching' && (
         <div>
-          {question.pairs.map((pair, index) => (
-            <div key={index}>
-              <span>{pair.left}</span> {/* Display the country or term on the left */}
-              <select onChange={(event) => handleMatchingChange(pair.left, event)}>
-                <option value="">Select the matching capital</option>
-                {pair.rightOptions.map((option, optIndex) => (
-                  <option key={optIndex} value={option}>
+          {/* Safely checking if pairs and rightOptions exist */}
+          {question.pairs?.map((pair, index) => (
+            <FormControl fullWidth key={index} margin="normal">
+              <InputLabel>{pair.left}</InputLabel>
+              <Select
+                value={question.matchingAnswers?.[pair.left] || ''}
+                label={pair.left}
+                onChange={(event) => handleMatchingChange(pair.left, event)}
+              >
+                {/* Safely checking if rightOptions exist */}
+                {pair.rightOptions?.map((option, optIndex) => (
+                  <MenuItem key={optIndex} value={option}>
                     {option}
-                  </option>
+                  </MenuItem>
                 ))}
-              </select>
-            </div>
+              </Select>
+            </FormControl>
           ))}
         </div>
       )}
 
-      {/* Render True/False Question */}
       {question.type === 'TrueFalse' && (
-        <div>
-          <label>
-            <input
-              type="radio"
-              name={`trueFalse-${question.id}`}
-              value="true"
-              onChange={handleTrueFalseChange}
-            />
-            True
-          </label>
-          <label>
-            <input
-              type="radio"
-              name={`trueFalse-${question.id}`}
-              value="false"
-              onChange={handleTrueFalseChange}
-            />
-            False
-          </label>
-        </div>
+        <RadioGroup onChange={handleTrueFalseChange}>
+          <FormControlLabel value="true" control={<Radio />} label="True" />
+          <FormControlLabel value="false" control={<Radio />} label="False" />
+        </RadioGroup>
       )}
-
-      {/* Add more question types as needed */}
     </div>
   );
 };

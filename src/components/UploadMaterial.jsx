@@ -1,18 +1,25 @@
+// src/components/UploadMaterial.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Typography, Button, Box } from '@mui/material';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 function UploadMaterial() {
-  const [file, setFile] = useState(null); // Mocking file upload
-  const navigate = useNavigate(); // For navigation
+  const [file, setFile] = useState(null);
+  const navigate = useNavigate();
 
   const handleFileUpload = (e) => {
-    setFile(e.target.files[0]); // Store the file in state
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      console.log('Selected File:', selectedFile);
+      setFile(selectedFile);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (file) {
-      // Navigate to test configuration page after upload
+      console.log('Uploaded File:', file);
       navigate('/configure');
     } else {
       alert('Please upload a file');
@@ -20,13 +27,42 @@ function UploadMaterial() {
   };
 
   return (
-    <div>
-      <h2>Upload Learning Material</h2>
+    <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, textAlign: 'center' }}>
+      <Typography variant="h4" gutterBottom>
+        Upload Learning Material
+      </Typography>
       <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileUpload} />
-        <button type="submit">Upload</button>
+        {/* Container to align the buttons horizontally */}
+        <Box display="flex" justifyContent="center" alignItems="center" mb={2} gap={2}>
+          <Button
+            variant="contained"
+            component="label"
+            startIcon={<UploadFileIcon />}
+          >
+            Choose File
+            <input
+              type="file"
+              hidden
+              onChange={handleFileUpload}
+              accept=".pdf,.doc,.docx,.txt,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            />
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={!file}  // Disable the button if no file is selected
+          >
+            Upload
+          </Button>
+        </Box>
+        {file && (
+          <Typography variant="body1" sx={{ mt: 2 }}>
+            {file.name}
+          </Typography>
+        )}
       </form>
-    </div>
+    </Box>
   );
 }
 
