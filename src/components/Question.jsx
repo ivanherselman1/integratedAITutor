@@ -13,6 +13,16 @@ const Question = ({ question, onAnswer }) => {
     onAnswer(event.target.value);
   };
 
+  // Handle True/False Change
+  const handleTrueFalseChange = (event) => {
+    onAnswer(event.target.value === 'true'); // Convert string to boolean
+  };
+
+  // Handle Matching Change
+  const handleMatchingChange = (leftTerm, event) => {
+    onAnswer({ ...question.matchingAnswers, [leftTerm]: event.target.value });
+  };
+
   return (
     <div>
       <h3>{question.question}</h3>
@@ -51,6 +61,49 @@ const Question = ({ question, onAnswer }) => {
           onChange={handleTextChange}
           placeholder="Fill in the blank..."
         />
+      )}
+
+      {/* Render Matching Question */}
+      {question.type === 'Matching' && (
+        <div>
+          {question.pairs.map((pair, index) => (
+            <div key={index}>
+              <span>{pair.left}</span> {/* Display the country or term on the left */}
+              <select onChange={(event) => handleMatchingChange(pair.left, event)}>
+                <option value="">Select the matching capital</option>
+                {pair.rightOptions.map((option, optIndex) => (
+                  <option key={optIndex} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Render True/False Question */}
+      {question.type === 'TrueFalse' && (
+        <div>
+          <label>
+            <input
+              type="radio"
+              name={`trueFalse-${question.id}`}
+              value="true"
+              onChange={handleTrueFalseChange}
+            />
+            True
+          </label>
+          <label>
+            <input
+              type="radio"
+              name={`trueFalse-${question.id}`}
+              value="false"
+              onChange={handleTrueFalseChange}
+            />
+            False
+          </label>
+        </div>
       )}
 
       {/* Add more question types as needed */}
