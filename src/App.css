@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -35,8 +37,38 @@
 
 .card {
   padding: 2em;
+  margin: 2em auto;
+  max-width: 600px;
+  text-align: left;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
 }
 
 .read-the-docs {
   color: #888;
+}
+
+button {
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: #646cff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #535bf2;
+}
+
+button:focus {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
 }

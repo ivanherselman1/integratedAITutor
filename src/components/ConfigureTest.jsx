@@ -1,4 +1,3 @@
-// src/components/ConfigureTest.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography, TextField, Button, Box } from '@mui/material';
@@ -41,9 +40,21 @@ function ConfigureTest() {
             inputProps={{ min: 1 }}
           />
         </Box>
-        <Button type="submit" variant="contained" color="primary">
-          Configure
-        </Button>
+        <Box mt={3}> {/* Add margin to give space before the button */}
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{
+              width: '100%',    // Ensure full-width button
+              backgroundColor: '#3498db', // Custom background color
+              color: 'white',    // White text
+              padding: '12px',   // Padding for better touch target
+            }}
+          >
+            Configure
+          </Button>
+        </Box>
       </form>
     </Box>
   );

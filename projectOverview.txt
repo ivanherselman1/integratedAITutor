@@ -1,7 +1,11 @@
 1. Overview
 The AI Tutor Prototype project is a React-based application designed to facilitate educators and learners in uploading learning materials, configuring tests, taking tests, and viewing graded results. The project utilizes Vite as the build tool for rapid development and efficient bundling. Learners can view their test results, including detailed feedback and scores provided by their tutor.
-The latest updates include improvements in UI alignment using Material UI components, fixing issues with the test question rendering, and handling complex question types like Matching.
 
+The latest updates include:
+
+Improvements in UI alignment using Material UI components.
+Fixing issues with rendering different question types on the TestResult page.
+Styling enhancements using Material UI's Paper component to give each question and answer block its own distinct appearance, improving readability and separation between questions and their respective answers.
 2. Current Directory Structure
 perl
 Copy code
@@ -31,8 +35,6 @@ AITUTORPROTOPROJECT/
 ├── package.json                # Project metadata and dependencies
 ├── README.md                   # Project documentation
 └── vite.config.js              # Vite configuration file
-
-
 3. Implemented Code and Functionality
 a. Main Application Setup (App.jsx):
 jsx
@@ -71,7 +73,6 @@ function App() {
 }
 
 export default App;
-
 b. Components:
 UploadMaterial.jsx:
 jsx
@@ -121,7 +122,6 @@ function UploadMaterial() {
 }
 
 export default UploadMaterial;
-
 ConfigureTest.jsx:
 jsx
 Copy code
@@ -156,7 +156,6 @@ function ConfigureTest() {
 }
 
 export default ConfigureTest;
-
 TestDisplay.jsx:
 jsx
 Copy code
@@ -205,23 +204,41 @@ function TestDisplay() {
 }
 
 export default TestDisplay;
-
 Question.jsx:
-jsx
-Copy code
-import React from 'react';
-import { Typography, RadioGroup, FormControlLabel, Radio, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Typography, RadioGroup, FormControlLabel, Radio, TextField, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 
 const Question = ({ question, onAnswer }) => {
-  const handleMCQChange = (event) => onAnswer(event.target.value);
-  const handleTextChange = (event) => onAnswer(event.target.value);
-  const handleTrueFalseChange = (event) => onAnswer(event.target.value === 'true');
-  const handleMatchingChange = (leftTerm, event) => onAnswer({ ...question.matchingAnswers, [leftTerm]: event.target.value });
+  const [answers, setAnswers] = useState(question.matchingAnswers || {});
+
+  useEffect(() => {
+    // If the parent component sends new props, update local state
+    setAnswers(question.matchingAnswers || {});
+  }, [question.matchingAnswers]);
+
+  const handleMCQChange = (event) => {
+    onAnswer(event.target.value);
+  };
+
+  const handleTextChange = (event) => {
+    onAnswer(event.target.value);
+  };
+
+  const handleTrueFalseChange = (event) => {
+    onAnswer(event.target.value === 'true');
+  };
+
+  const handleMatchingChange = (leftTerm, event) => {
+    const updatedAnswers = { ...answers, [leftTerm]: event.target.value };
+    setAnswers(updatedAnswers);  // Update local state
+    onAnswer(updatedAnswers);    // Propagate changes to the parent
+  };
 
   return (
-    <div>
+    <Box>
       <Typography variant="h6" gutterBottom>{question.question}</Typography>
 
+      {/* Handling MCQ */}
       {question.type === 'MCQ' && (
         <RadioGroup onChange={handleMCQChange}>
           {question.options.map((option, index) => (
@@ -230,48 +247,168 @@ const Question = ({ question, onAnswer }) => {
         </RadioGroup>
       )}
 
+      {/* Handling Text */}
       {question.type === 'Text' && (
-        <TextField variant="outlined" fullWidth multiline rows={4} onChange={handleTextChange} placeholder="Write your answer here..." />
+        <TextField 
+          variant="outlined" 
+          fullWidth 
+          multiline 
+          rows={4} 
+          onChange={handleTextChange} 
+          placeholder="Write your answer here..." 
+        />
       )}
 
+      {/* Handling Fill-in-the-Blank */}
       {question.type === 'FillInTheBlank' && (
-        <TextField variant="outlined" fullWidth onChange={handleTextChange} placeholder="Fill in the blank..." />
+        <TextField 
+          variant="outlined" 
+          fullWidth 
+          onChange={handleTextChange} 
+          placeholder="Fill in the blank..." 
+        />
       )}
 
-      {question.type === 'Matching' && (
-        <div>
-          {question.pairs?.map((pair, index) => (
-            <FormControl fullWidth key={index} margin="normal">
-              <InputLabel>{pair.left}</InputLabel>
-              <Select value={question.matchingAnswers?.[pair.left] || ''} label={pair.left} onChange={(event) => handleMatchingChange(pair.left, event)}>
-                {pair.rightOptions?.map((option, optIndex) => (
-                  <MenuItem key={optIndex} value={option}>{option}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          ))}
-        </div>
-      )}
-
+      {/* Handling True/False */}
       {question.type === 'TrueFalse' && (
         <RadioGroup onChange={handleTrueFalseChange}>
           <FormControlLabel value="true" control={<Radio />} label="True" />
           <FormControlLabel value="false" control={<Radio />} label="False" />
         </RadioGroup>
       )}
-    </div>
+
+      {/* Handling Matching */}
+      {question.type === 'Matching' && (
+        <div>
+          {question.pairs?.map((pair, index) => (
+            <FormControl fullWidth key={index} margin="normal">
+              <InputLabel>{pair.left}</InputLabel>
+              <Select
+                value={answers[pair.left] || ''}
+                label={pair.left}
+                onChange={(event) => handleMatchingChange(pair.left, event)}
+              >
+                {pair.rightOptions?.map((option, optIndex) => (
+                  <MenuItem key={optIndex} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          ))}
+        </div>
+      )}
+    </Box>
   );
 };
 
 export default Question;
 
+TestResult.jsx:
+jsx
+Copy code
+import React, { useState, useEffect } from 'react';
+import gradedTestData from '../gradedTestData.json';  // Mock graded test data
+import { Typography, Box, Paper } from '@mui/material';
 
+function TestResult() {
+  const [testResults, setTestResults] = useState(null);
+
+  useEffect(() => {
+    setTestResults(gradedTestData);
+  }, []);
+
+  if (!testResults) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <Box sx={{ maxWidth: 800, mx: 'auto', mt: 4 }}>
+      <Typography variant="h4" gutterBottom>{testResults.testTitle}</Typography>
+      <Typography variant="h6" gutterBottom>
+        Total Score: {testResults.totalScore} / {testResults.totalPoints}
+      </Typography>
+      <Typography variant="h6" gutterBottom>
+        Tutor Feedback: {testResults.tutor.overallFeedback}
+      </Typography>
+      <hr />
+      <div>
+        {testResults.questions.map((question, index) => (
+          <Paper key={index} elevation={3} sx={{ mb: 4, p: 3, borderRadius: 2, backgroundColor: '#f5f5f5' }}>
+            <Typography variant="h6" gutterBottom>
+              Question {index + 1}: {question.question}
+            </Typography>
+
+            {/* Handling MCQ */}
+            {question.type === 'MCQ' && (
+              <>
+                <Typography variant="body1"><strong>Your Answer:</strong> {question.learnerAnswerMCQ.join(', ')}</Typography>
+                <Typography variant="body1"><strong>Correct Answer:</strong> {question.correctAnswerMCQ.join(', ')}</Typography>
+                <Typography variant="body1"><strong>Explanation:</strong> {question.explanationMCQ}</Typography>
+                <Typography variant="body1"><strong>Feedback:</strong> {question.tutorFeedback}</Typography>
+                <Typography variant="body1"><strong>Score:</strong> {question.score} points</Typography>
+              </>
+            )}
+
+            {/* Handling Text Type */}
+            {question.type === 'Text' && (
+              <>
+                <Typography variant="body1"><strong>Your Answer:</strong> {question.learnerAnswerText || "No answer provided"}</Typography>
+                <Typography variant="body1"><strong>Correct Answer:</strong> {question.correctAnswerText.join(', ')}</Typography>
+                <Typography variant="body1"><strong>Feedback:</strong> {question.tutorFeedback}</Typography>
+                <Typography variant="body1"><strong>Score:</strong> {question.score} points</Typography>
+              </>
+            )}
+
+            {/* Handling True/False */}
+            {question.type === 'TrueFalse' && (
+              <>
+                <Typography variant="body1"><strong>Your Answer:</strong> {question.learnerAnswerTrueFalse ? "True" : "False"}</Typography>
+                <Typography variant="body1"><strong>Correct Answer:</strong> {question.correctAnswerTrueFalse ? "True" : "False"}</Typography>
+                <Typography variant="body1"><strong>Explanation:</strong> {question.explanationTrueFalse}</Typography>
+                <Typography variant="body1"><strong>Feedback:</strong> {question.tutorFeedback}</Typography>
+                <Typography variant="body1"><strong>Score:</strong> {question.score} points</Typography>
+              </>
+            )}
+
+            {/* Handling Fill-in-the-Blank */}
+            {question.type === 'FillInTheBlank' && (
+              <>
+                <Typography variant="body1"><strong>Your Answer:</strong> {question.learnerAnswerFillInTheBlank || "No answer provided"}</Typography>
+                <Typography variant="body1"><strong>Correct Answer:</strong> {question.correctAnswerFillInTheBlank.join(', ')}</Typography>
+                <Typography variant="body1"><strong>Feedback:</strong> {question.tutorFeedback}</Typography>
+                <Typography variant="body1"><strong>Score:</strong> {question.score} points</Typography>
+              </>
+            )}
+
+            {/* Handling Matching */}
+            {question.type === 'Matching' && (
+              <>
+                <Typography variant="body1"><strong>Matches:</strong></Typography>
+                {question.pairs.map((pair, pairIndex) => (
+                  <Box key={pairIndex}>
+                    <Typography variant="body1">
+                      <strong>{pair.left}:</strong> Your Answer: {question.learnerAnswerMatching?.[pair.left] || "No match provided"} | Correct Answer: {question.correctAnswerMatching.find(item => item.left === pair.left)?.right}
+                    </Typography>
+                  </Box>
+                ))}
+                <Typography variant="body1"><strong>Feedback:</strong> {question.tutorFeedback}</Typography>
+                <Typography variant="body1"><strong>Score:</strong> {question.score} points</Typography>
+              </>
+            )}
+          </Paper>
+        ))}
+      </div>
+    </Box>
+  );
+}
+
+export default TestResult;
 4. Mock Data Files
 gradedTestData.json: Contains mock data for graded test results with detailed feedback.
-testData.json: Contains 20 mock questions with various types including MCQ, Text, Fill-in-the-Blank, True/False, and Matching questions.
-
+testData.json: Contains 20 mock questions with various types, including MCQ, Text, Fill-in-the-Blank, True/False, and Matching questions.
 5. Major Improvements
 UI Alignment Fixes: Implemented Material UI for better alignment and appearance of buttons and inputs.
 Test Rendering Fixes: Fixed issues with rendering more than 5 questions by safely slicing the available data and handling undefined properties in the questions.
 Improved Question Handling: Enhanced the handling of different question types, especially Matching questions, ensuring the UI doesn’t crash when properties are undefined.
-
+Styling Enhancements: Added Material UI's Paper component on the TestResult page, giving each question its own distinct block to improve readability and separation between questions and their respective answers.
